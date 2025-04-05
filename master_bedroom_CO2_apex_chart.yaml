@@ -1,0 +1,74 @@
+type: custom:apexcharts-card
+header:
+  show: true
+  title: Indoor vs Outdoor CO2 Levels
+  show_states: true
+graph_span: 48h
+span:
+  end: hour
+apex_config:
+  chart:
+    animations:
+      enabled: true
+      easing: easeinout
+      speed: 800
+  tooltip:
+    enabled: true
+    shared: true
+    followCursor: true
+  legend:
+    position: top
+    horizontalAlign: center
+  stroke:
+    curve: smooth
+    width: 2
+  fill:
+    type: gradient
+    gradient:
+      shade: dark
+      type: vertical
+      gradientToColors:
+        - "#FFFF00"
+        - "#FF7E00"
+        - "#FF0000"
+      stops:
+        - 0
+        - 50
+        - 100
+  yaxis:
+    decimalsInFloat: 0
+    title:
+      text: CO2 (PPM)
+    min: 300
+  xaxis:
+    labels:
+      format: hh:mm
+series:
+  - entity: sensor.master_bedroom_indoor_air_quality_sensor_carbon_dioxide
+    name: Indoor CO2
+    type: column
+    stroke_width: 3
+    opacity: 0.9
+    color_threshold:
+      - value: 400
+        color: "#00E400"
+      - value: 1000
+        color: "#FFFF00"
+      - value: 2000
+        color: "#FF7E00"
+      - value: 5000
+        color: "#FF0000"
+  - entity: sensor.o_1pst_carbon_dioxide
+    name: Outdoor CO2
+    type: line
+    stroke_width: 3
+    opacity: 0.8
+    color_threshold:
+      - value: 400
+        color: "#00E400"
+      - value: 1000
+        color: "#FFFF00"
+      - value: 2000
+        color: "#FF7E00"
+      - value: 5000
+        color: "#FF0000"
