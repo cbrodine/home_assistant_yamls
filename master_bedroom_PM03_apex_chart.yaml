@@ -1,0 +1,69 @@
+type: custom:apexcharts-card
+header:
+  show: true
+  title: Indoor vs Outdoor PM 0.3 Air Quality
+  show_states: true
+graph_span: 48h
+span:
+  end: hour
+apex_config:
+  chart:
+    animations:
+      enabled: true
+      easing: easeinout
+      speed: 800
+  tooltip:
+    enabled: true
+    shared: true
+    followCursor: true
+  legend:
+    position: top
+    horizontalAlign: center
+  stroke:
+    curve: smooth
+    width: 2
+  yaxis:
+    decimalsInFloat: 0
+    title:
+      text: PM 0.3 Particles/dL
+    min: 0
+  xaxis:
+    labels:
+      format: hh:mm
+series:
+  - entity: sensor.master_bedroom_indoor_air_quality_sensor_pm0_3
+    name: Indoor PM 0.3
+    type: column
+    stroke_width: 3
+    opacity: 0.9
+    color_threshold:
+      - value: 0
+        color: "#00E400"
+      - value: 1000
+        color: "#FFFF00"
+      - value: 5000
+        color: "#FF7E00"
+      - value: 10000
+        color: "#FF0000"
+      - value: 20000
+        color: "#8F3F97"
+      - value: 40000
+        color: "#7E0023"
+  - entity: sensor.o_1pst_pm0_3
+    name: Outdoor PM 0.3
+    type: line
+    stroke_width: 3
+    opacity: 0.8
+    color_threshold:
+      - value: 0
+        color: "#00E400"
+      - value: 1000
+        color: "#FFFF00"
+      - value: 5000
+        color: "#FF7E00"
+      - value: 10000
+        color: "#FF0000"
+      - value: 20000
+        color: "#8F3F97"
+      - value: 40000
+        color: "#7E0023"
