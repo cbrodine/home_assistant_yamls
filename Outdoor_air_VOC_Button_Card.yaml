@@ -1,0 +1,61 @@
+type: custom:button-card
+entity: sensor.o_1pst_voc_index
+name: VOC Index
+show_name: true
+show_entity_picture: false
+state_display: "[[[ return entity.state; ]]]"
+icon: |
+  [[[
+    let voc = entity.state ? parseInt(entity.state) : 0;
+    return voc < 100 ? "mdi:leaf" : 
+           voc < 200 ? "mdi:weather-partly-cloudy" : 
+           voc < 300 ? "mdi:alert-circle-outline" : 
+           voc < 400 ? "mdi:alert" : 
+           "mdi:biohazard"; 
+  ]]]
+styles:
+  card:
+    - padding: 10px
+    - font-size: 16px
+    - border-radius: 10px
+    - text-align: center
+    - "--paper-item-icon-color": white
+    - background-color: |
+        [[[
+          let voc = entity.state ? parseInt(entity.state) : 0;
+          if (voc < 100) return "#2ECC71"; /* Green - Excellent */
+          if (voc >= 100 && voc < 200) return "#F1C40F"; /* Yellow - Moderate */
+          if (voc >= 200 && voc < 300) return "#E67E22"; /* Orange - Caution */
+          if (voc >= 300 && voc < 400) return "#E74C3C"; /* Red - Poor */
+          return "#8E44AD"; /* Purple - Hazardous */
+        ]]]
+  name:
+    - font-size: 20px
+    - font-weight: bold
+    - position: absolute
+    - top: 10px
+    - left: 50%
+    - transform: translateX(-50%)
+    - margin-bottom: 10px
+    - color: black
+  custom_fields:
+    tooltip:
+      - position: absolute
+      - bottom: 10px
+      - left: 50%
+      - transform: translateX(-50%)
+      - font-size: 12px
+      - color: white
+      - background: rgba(0, 0, 0, 0.5)
+      - padding: 5px
+      - border-radius: 5px
+custom_fields:
+  tooltip: |
+    [[[
+      let voc = entity.state ? parseInt(entity.state) : 0;
+      return entity.state + ' - ' + 
+        (voc < 100 ? 'Excellent' : 
+        (voc < 200 ? 'Moderate' : 
+        (voc < 300 ? 'Caution' : 
+        (voc < 400 ? 'Poor' : 'Hazardous'))));
+    ]]]
